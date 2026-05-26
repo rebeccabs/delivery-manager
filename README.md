@@ -26,7 +26,7 @@ Próximas implementações:
 - interface web
 - dashboard de métricas
 
-## Aprendizadosa até aqui:
+## Aprendizados até aqui:
 - lógica de programação
 - estrutura de projetos
 - versionamento com Git
