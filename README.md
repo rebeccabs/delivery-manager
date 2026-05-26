@@ -1,8 +1,8 @@
 # Delivery Manager
 
-Projeto desenvolivido em Python com foco em prática de lógica de programação e construção de portfólio na área de tecnologia.
+Projeto desenvolvido em Python com foco em prática de lógica de programação e construção de portfólio na área de tecnologia.
 
-A ideia surgiu a partir da minha experiência profissional com logistica e operações de entrega, ransformando um problema real do dia a dia em um projeto prático para aprendizado em desenvolvimento de software.
+A ideia surgiu a partir da minha experiência profissional com logistica e operações de entrega, transformando um problema real do dia a dia em um projeto prático para aprendizado em desenvolvimento de software.
 
 ## Funcionalidades atuais:
 - Inicialização do sistema
