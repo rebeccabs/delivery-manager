@@ -1,31 +1,29 @@
 import json
 import os 
+# nome do arquivo usado pra armazenar entregas
 ARQUIVO_ENTREGAS = "entregas.json"
+
+# limpa a tela do terminal de acordo com sistema operacional
 def limpar_terminal():
     os.system("cls" if os.name == "nt" else "clear")
+# pausa a execução para o usuário ler a mensagem antes de voltar ao menu anterior
 def pausar():
     input("\nPressione Enter para continuar...")
 
-# carrega as entregas do arquivo JSON
+# carrega as entregas salvas do arquivo JSON
 def carregar_entregas():
-    # tenta abrir os arquivos
     try:
-        # abre o arquivo em modo leitura
         with open(ARQUIVO_ENTREGAS, "r", encoding="utf-8") as arquivo:
-            # converte JSON pra lista Python
             return json.load(arquivo)
-        # caso o arquivo ainda não exista
     except FileNotFoundError:
-        # retorna lista vazia
         return []
-    # salva a lista de entregas no arquivo JSON
+    
+# salva lista atual de entregas no arquivo JSON
 def salvar_entregas():
-    # abre o arquivo em modo escrita
     with open(ARQUIVO_ENTREGAS, "w", encoding="utf-8") as arquivo:
-        # converte lista Python para JSON
         json.dump(entregas, arquivo, indent=4, ensure_ascii=False)
 
-# lista principal carregada do JSON
+# lista principal do sistema, carregada ao iniciar o programa
 entregas = carregar_entregas()
 def cadastrar_entrega():
     limpar_terminal()
@@ -35,43 +33,52 @@ def cadastrar_entrega():
     if cliente == "" or endereco == "":
         print("Nome e endereço não podem ficar vazios.")
         return
-    # estrutura de entrega
+    # Cria uma nova entrega com status inicial pendente
     entrega = {
         "cliente": cliente,
         "endereco": endereco,
         "status": "Pendente"
     }
-    # aiciona entrega na lsta
+    # Adiciona a nova entrega à lista principal
     entregas.append(entrega)
-    # atualiza arquivo JSON
+    # Salva a alteração no arquivo JSON
     salvar_entregas()
     print("Entrega cadastrada com sucesso!")
 # exibe todas as entregas cadastradas
 def listar_entregas():
+    limpar_terminal()
+    print("=== LISTA DE ENTREGAS ===\n")
     if len(entregas) == 0:
         print("Nenhuma entrega cadastrada.")
     else:
         print("\nEntregas cadastradas:")
         for indice, entrega in enumerate(entregas):
-            print(f"{indice + 1}. Cliente: {entrega['cliente']} | Endereço: {entrega['endereco']} | Status: {entrega['status']}")
+            print (f"{indice + 1}. CLiente: {entrega['cliente']}")
+            print(f"  Endereço: {entrega['endereco']}")
+            print(f"  Status: {entrega['status']}")
+            print("-" * 30)
 def atualizar_status():
+    limpar_terminal()
+    print("=== ATUALIZAR STATUS ===\n")
+
     if len(entregas) == 0:
         print("Nenhuma entrega para atualizar.")
     else:
         # Mostra entregas cadastradas
         for indice, entrega in enumerate(entregas):
-            print(f"{indice + 1}. {entrega['cliente']} - {entrega['status']}")
-        # Tenta converter input para número
+            print(f"{indice + 1}. CLiente: {entrega['cliente']}")
+            print("-" * 30)
+        # Valida se o usuário digitou um número
         try:
             numero = int(input("Digite o número da entrega: "))
-            # Verifica se número existe na lista
+            # Verifica se a entrega escolhida existe
             if 1 <= numero <= len(entregas):
                 entregas[numero - 1]["status"] = "Entregue"
                 salvar_entregas()
                 print("Status atualizado com sucesso!")
             else:
                 print("Número inválido.")
-        # Caso usuário digite letras
+        # Trata entradas inválidas, como letras ou símbolos
         except ValueError:
             print("Digite apenas números.")
 
@@ -83,7 +90,7 @@ def mostrar_menu():
     print("3 - Atualizar status")
     print("4 - Sair")
 
-# loop principal do sistema
+# mantém o sistema em execução até o usuário escolher sair
 while True:   
     mostrar_menu()
 

@@ -27,6 +27,11 @@
     {
         "cliente": "Janice",
         "endereco": "Rua F",
+        "status": "Entregue"
+    },
+    {
+        "cliente": "Janio",
+        "endereco": "Rua H",
         "status": "Pendente"
     }
 ]
