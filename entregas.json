@@ -7,7 +7,7 @@
     {
         "cliente": "João",
         "endereco": "Rua F",
-        "status": "Pendente"
+        "status": "Entregue"
     },
     {
         "cliente": "Antonia",
@@ -22,6 +22,21 @@
     {
         "cliente": "José",
         "endereco": "Rua H",
+        "status": "Pendente"
+    },
+    {
+        "cliente": "Janice",
+        "endereco": "Rua I",
+        "status": "Pendente"
+    },
+    {
+        "cliente": "Clara",
+        "endereco": "Rua J",
+        "status": "Pendente"
+    },
+    {
+        "cliente": "Robson",
+        "endereco": "Rua L",
         "status": "Pendente"
     }
 ]

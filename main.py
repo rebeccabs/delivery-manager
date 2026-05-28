@@ -17,12 +17,15 @@ def salvar_entregas():
     with open("entregas.json", "w", encoding="utf-8") as arquivo:
         # converte lista Python para JSON
         json.dump(entregas, arquivo, indent=4, ensure_ascii=False)
-        
+
 # lista principal carregada do JSON
 entregas = carregar_entregas()
 def cadastrar_entrega():
-    cliente = input("Nome do cliente: ")
-    endereco = input("Endereço de entrega: ")
+    cliente = input("Nome do cliente: ").strip()
+    endereco = input("Endereço de entrega: ").strip()
+    if cliente == "" or endereco == "":
+        print("Nome e endereço não podem ficar vazios.")
+        return
     # estrutura de entrega
     entrega = {
         "cliente": cliente,
@@ -45,17 +48,23 @@ def listar_entregas():
 def atualizar_status():
     if len(entregas) == 0:
         print("Nenhuma entrega para atualizar.")
-    else:
-        for indice, entrega in enumerate(entregas):
-            print(f"{indice + 1}. {entrega['cliente']} - {entrega['status']}")
+        return
+
+    for indice, entrega in enumerate(entregas):
+        print(f"{indice + 1}. {entrega['cliente']} - {entrega['status']}")
+
+    try:
         numero = int(input("Digite o número da entrega: "))
-        if 1 <= numero <= len(entregas):
-            # atualiza status da entrega para "Entregue"
-            entregas[numero - 1]["status"] = "Entregue"
-            salvar_entregas()
-            print("Status atualizado com sucesso!")
-        else:
-            print("Número inválido.")
+    except ValueError:
+        print("Digite apenas números.")
+        return
+
+    if 1 <= numero <= len(entregas):
+        entregas[numero - 1]["status"] = "Entregue"
+        salvar_entregas()
+        print("Status atualizado com sucesso!")
+    else:
+        print("Número inválido.")
 
 # loop principal do sistema
 while True:   
