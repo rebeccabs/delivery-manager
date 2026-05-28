@@ -1,0 +1,27 @@
+[
+    {
+        "cliente": "Maria",
+        "endereco": "Rua B",
+        "status": "Entregue"
+    },
+    {
+        "cliente": "João",
+        "endereco": "Rua F",
+        "status": "Pendente"
+    },
+    {
+        "cliente": "Antonia",
+        "endereco": "Rua G",
+        "status": "Entregue"
+    },
+    {
+        "cliente": "Amanda",
+        "endereco": "Rua A",
+        "status": "Pendente"
+    },
+    {
+        "cliente": "José",
+        "endereco": "Rua H",
+        "status": "Pendente"
+    }
+]
