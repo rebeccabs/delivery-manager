@@ -22,12 +22,12 @@
     {
         "cliente": "Clara",
         "endereco": "Rua E",
-        "status": "Pendente"
+        "status": "Entregue"
     },
     {
         "cliente": "Janice",
         "endereco": "Rua F",
-        "status": "Entregue"
+        "status": "Em rota"
     },
     {
         "cliente": "Janio",

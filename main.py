@@ -2,6 +2,7 @@ import json
 import os 
 # nome do arquivo usado pra armazenar entregas
 ARQUIVO_ENTREGAS = "entregas.json"
+STATUS_DISPONIVEL =["Pendente", "Em rota", "Entregue"]
 
 # limpa a tela do terminal de acordo com sistema operacional
 def limpar_terminal():
@@ -33,6 +34,7 @@ def cadastrar_entrega():
     if cliente == "" or endereco == "":
         print("Nome e endereço não podem ficar vazios.")
         return
+    
     # Cria uma nova entrega com status inicial pendente
     entrega = {
         "cliente": cliente,
@@ -44,6 +46,7 @@ def cadastrar_entrega():
     # Salva a alteração no arquivo JSON
     salvar_entregas()
     print("Entrega cadastrada com sucesso!")
+
 # exibe todas as entregas cadastradas
 def listar_entregas():
     limpar_terminal()
@@ -63,24 +66,35 @@ def atualizar_status():
 
     if len(entregas) == 0:
         print("Nenhuma entrega para atualizar.")
-    else:
-        # Mostra entregas cadastradas
-        for indice, entrega in enumerate(entregas):
-            print(f"{indice + 1}. CLiente: {entrega['cliente']}")
-            print("-" * 30)
-        # Valida se o usuário digitou um número
-        try:
-            numero = int(input("Digite o número da entrega: "))
-            # Verifica se a entrega escolhida existe
-            if 1 <= numero <= len(entregas):
-                entregas[numero - 1]["status"] = "Entregue"
-                salvar_entregas()
-                print("Status atualizado com sucesso!")
+        return
+
+    for indice, entrega in enumerate(entregas):
+        print(f"{indice + 1}. Cliente: {entrega['cliente']}")
+        print("-" * 30)
+
+    try:
+        numero = int(input("Digite o número da entrega: "))
+
+        if 1 <= numero <= len(entregas):
+            print("\nEscolha um novo status:")
+
+            for indice, status in enumerate(STATUS_DISPONIVEL):
+                print(f"{indice + 1} - {status}")
+
+            opcao_status = int(input("Digite o número do novo status: "))
+            if 1 <= opcao_status <= len(STATUS_DISPONIVEL):
+                status_atual = entregas[numero - 1]["status"]
+                novo_status = STATUS_DISPONIVEL[opcao_status - 1]
+                if status_atual == novo_status:
+                    print("A entrega já possui esse status.")
+                else:
+                    entregas[numero - 1]["status"] = novo_status
+                    salvar_entregas()
+                    print("Status atualizado com sucesso!")
             else:
-                print("Número inválido.")
-        # Trata entradas inválidas, como letras ou símbolos
-        except ValueError:
-            print("Digite apenas números.")
+                print("Status inválido.")
+    except ValueError:
+        print("Digite apenas números.")
 
 def mostrar_menu():
     limpar_terminal()
