@@ -1,6 +1,14 @@
 import json
 import os
 
+from database import(
+    criar_tabela,
+    cadastrar_entregas_db,
+    listar_entregas_db
+)
+
+criar_tabela()
+
 ARQUIVO_ENTREGAS = "entregas.json"
 STATUS_DISPONIVEL = ["Pendente", "Em rota", "Entregue"]
 
@@ -70,25 +78,18 @@ def cadastrar_entrega():
     if cliente == "" or endereco == "":
         print("Nome e endereço não podem ficar vazios.")
         return
-# Cria o registro da nova entrega
-    entrega = {
-        "id": gerar_proximo_id(),
-        "cliente": cliente,
-        "endereco": endereco,
-        "status": "Pendente"
-    }
-
-    entregas.append(entrega)
-    salvar_entregas()
-
+    
+    cadastrar_entregas_db(cliente, endereco, "Pendente")
     print("Entrega cadastrada com sucesso!")
 
 # Exibe todas as entregas cadastradas
 def exibir_entregas():
+    entregas = listar_entregas_db()
+
     for entrega in entregas:
-        print(f"[{entrega['id']}] Cliente: {entrega['cliente']}")
-        print(f"   Endereço: {entrega['endereco']}")
-        print(f"   Status: {entrega['status']}")
+        print(f"[{entrega[0]}] Cliente: {entrega[1]}")
+        print(f"   Endereço: {entrega[2]}")
+        print(f"   Status: {entrega[3]}")
         print("-" * 30)
 
 # Exibe uma versão resumida das entregas para atualização de status
@@ -242,7 +243,7 @@ def mostrar_menu():
     print("3 - Atualizar status")
     print("4 - Pesquisar entrega")
     print("5 - Excluir entrega")
-    print("6 - Estatísticas.")
+    print("6 - Estatísticas")
     print("7 - Sair")
 
 # Mantém o sistema em execução até o usuário escolher sair
