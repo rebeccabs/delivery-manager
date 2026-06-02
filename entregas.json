@@ -36,12 +36,6 @@
         "id": 6
     },
     {
-        "cliente": "Janio",
-        "endereco": "Rua H",
-        "status": "Pendente",
-        "id": 7
-    },
-    {
         "cliente": "Jessica",
         "endereco": "Rua K",
         "status": "Em rota",

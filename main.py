@@ -155,6 +155,84 @@ def atualizar_status():
     except ValueError:
         print("Digite apenas números.")
 
+# Pesquisa entregas pelo nome do cliente
+def pesquisar_entrega():
+    limpar_terminal()
+    print("=== PESQUISAR ENTREGA===\n")
+
+    if len(entregas) == 0:
+        print("Nenhuma entrega cadastrada.")
+        return
+
+    termo = input("Digite o nome do cliente: ").strip().lower()
+
+    if termo == "":
+        print("O campo de pesquisa não pode ficar vazio.")
+        return
+
+    encontradas = []
+
+    for entrega in entregas:
+        if termo in entrega["cliente"].lower():
+            encontradas.append(entrega)
+
+    if len(encontradas) == 0:
+        print("Nenhuma entrega encontrada.")
+        return
+
+    print("\nEntregas encontradas:\n")
+    for entrega in encontradas:
+        print(f"[{entrega['id']}] Cliente: {entrega['cliente']}")
+        print(f"   Endereço: {entrega['endereco']}")
+        print(f"   Status: {entrega['status']}")
+        print("-" * 30)
+
+# Remove uma entrega pelo ID
+def excluir_entrega():
+    limpar_terminal()
+    print("=== EXCLUIR ENTREGA ===\n")
+
+    if len(entregas) == 0:
+        print("Nenhuma entrega cadastrada.")
+        return
+
+    exibir_entregas()
+
+    try:
+        id_entrega = int(input("\nDigite o ID da entrega: "))
+        for entrega in entregas:
+            if entrega["id"] == id_entrega:
+                entregas.remove(entrega)
+                salvar_entregas()
+                print("Entrega excluída com sucesso!")
+                return
+
+        print("ID não encontrado.")
+
+    except ValueError:
+        print("Digite apenas números.")
+
+def mostrar_estatisticas():
+    limpar_terminal()
+    print("=== ESTATÍSTICAS ===\n")
+
+    total = len(entregas)
+    pendentes = 0
+    em_rota = 0
+    entregues = 0
+
+    for entrega in entregas:
+        if entrega["status"] == "pendente":
+            pendentes += 1
+        elif entrega["status"] == "Em rota":
+            em_rota += 1
+        elif entrega["status"] == "Entregue":
+            entregues += 1
+
+    print(f"Ttotal de entregues: {total}")
+    print(f"Pendentes): {pendentes}")
+    print(f"Em rota: {em_rota}")
+    print(f"Entregues: {entregues}")
 
 def mostrar_menu():
     limpar_terminal()
@@ -162,7 +240,10 @@ def mostrar_menu():
     print("1 - Cadastrar entrega")
     print("2 - Listar entregas")
     print("3 - Atualizar status")
-    print("4 - Sair")
+    print("4 - Pesquisar entrega")
+    print("5 - Excluir entrega")
+    print("6 - Estatísticas.")
+    print("7 - Sair")
 
 # Mantém o sistema em execução até o usuário escolher sair
 while True:
@@ -180,7 +261,16 @@ while True:
         atualizar_status()
         pausar()
     elif opcao == "4":
-        print("Saindo...")
+        pesquisar_entrega()
+        pausar()
+    elif opcao == "5":
+        excluir_entrega()
+        pausar()
+    elif opcao == "6":
+        mostrar_estatisticas()
+        pausar()
+    elif opcao == "7":
+        print("Saindo do sistema")
         break
     else:
         print("Opção inválida.")
