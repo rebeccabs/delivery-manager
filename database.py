@@ -51,3 +51,79 @@ def listar_entregas_db():
     conexao.close()
 
     return entregas
+
+
+def pesquisar_entregas_db(termo):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        SELECT id, cliente, endereco, status
+        FROM entregas
+        WHERE cliente LIKE ?
+    """, (f"%{termo}%",))
+
+    entregas = cursor.fetchall()
+
+    conexao.close()
+
+    return entregas
+
+
+def buscar_entrega_por_id_db(id_entrega):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        SELECT id, cliente, endereco, status
+        FROM entregas
+        WHERE id = ?
+    """, (id_entrega,))
+
+    entrega = cursor.fetchone()
+
+    conexao.close()
+
+    return entrega
+
+
+def atualizar_status_db(id_entrega, novo_status):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        UPDATE entregas
+        SET status = ?
+        WHERE id = ?
+    """, (novo_status, id_entrega))
+
+    conexao.commit()
+    conexao.close()
+
+def excluir_entrega_db(id_entrega):
+    conexao = conectar()
+    cursor = conexao.cursor()
+    
+    cursor.execute("""
+        DELETE FROM entregas
+        WHERE id = ?
+    """, (id_entrega,))
+
+    conexao.commit()
+    conexao.close()
+
+def contar_entregas_por_status_db():
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        SELECT status, COUNT(*)
+        FROM entregas
+        GROUP BY status
+    """)
+
+    resultados = cursor.fetchall()
+
+    conexao.close()
+
+    return resultados
