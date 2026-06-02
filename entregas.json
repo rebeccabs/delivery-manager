@@ -2,36 +2,49 @@
     {
         "cliente": "Maria",
         "endereco": "Rua A",
-        "status": "Entregue"
+        "status": "Em rota",
+        "id": 1
     },
     {
         "cliente": "João",
         "endereco": "Rua B",
-        "status": "Entregue"
+        "status": "Entregue",
+        "id": 2
     },
     {
         "cliente": "Amanda",
         "endereco": "Rua C",
-        "status": "Pendente"
+        "status": "Pendente",
+        "id": 3
     },
     {
         "cliente": "José",
         "endereco": "Rua D",
-        "status": "Entregue"
+        "status": "Pendente",
+        "id": 4
     },
     {
         "cliente": "Clara",
         "endereco": "Rua E",
-        "status": "Entregue"
+        "status": "Em rota",
+        "id": 5
     },
     {
         "cliente": "Janice",
         "endereco": "Rua F",
-        "status": "Em rota"
+        "status": "Em rota",
+        "id": 6
     },
     {
         "cliente": "Janio",
         "endereco": "Rua H",
-        "status": "Pendente"
+        "status": "Pendente",
+        "id": 7
+    },
+    {
+        "cliente": "Jessica",
+        "endereco": "Rua K",
+        "status": "Em rota",
+        "id": 8
     }
 ]
