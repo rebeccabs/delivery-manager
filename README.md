@@ -1,60 +1,78 @@
 # Delivery Manager
 
-Projeto desenvolvido em Python com foco em aprendizado prático de desenvolvimento de software, lógica de programação, Git/GitHub e evolução para aplicações web full stack.
+Sistema de gerenciamento de entregas desenvolvido em Python e SQLite com foco em aprendizado prático de desenvolvimento de software, banco de dados, versionamento com Git/GitHub e evolução para aplicações web.
 
-O sistema simula o gerenciamento de entregas de uma operação logística, permitindo cadastrar pedidos, listar entregas e atualizar status diretamente pelo terminal.
+O projeto simula uma operação logística de entregas, permitindo cadastrar, listar, pesquisar, atualizar e excluir entregas através de uma interface em terminal.
 
-A ideia do projeto surgiu a partir da minha experiência profissional com logística e operações de entrega, transformando situações reais do dia a dia em um software para prática de programação e construção de portfólio.
+A ideia surgiu a partir da minha experiência profissional com logística e operações de entrega, transformando situações reais do dia a dia em um software para estudo, prática e construção de portfólio.
 
----
-
-# Tecnologias utilizadas
+## Tecnologias Utilizadas
 
 * Python
-* JSON
+* SQLite
 * Git
 * GitHub
 * VS Code
 
----
-
-# Funcionalidades atuais
+## Funcionalidades
 
 * Cadastro de entregas
 * Listagem de entregas
+* Pesquisa por cliente
 * Atualização de status
-* Persistência de dados em JSON
-* Carregamento automático das entregas
+* Exclusão de entregas
+* Estatísticas das entregas
+* Persistência de dados em banco SQLite
 * Tratamento de erros com try/except
-* Validação de campos
-* Interface de terminal melhorada
-* Limpeza de terminal
-* Sistema de pausas entre telas
+* Validação de entradas
+* Interface em terminal
 
----
+## Estrutura do Projeto
 
-# Conceitos praticados
+```text
+delivery-manager/
+│
+├── main.py
+├── database.py
+├── delivery_manager.db
+└── README.md
+```
 
-* Variáveis
-* Listas
-* Dicionários
+## Conceitos Praticados
+
+### Python
+
 * Funções
+* Listas
+* Tuplas
 * Condicionais
 * Loops
 * Modularização
-* Abstração
+* Tratamento de exceções
+* Refatoração de código
+
+### Banco de Dados
+
+* SQLite
+* CRUD
+* SELECT
+* INSERT
+* UPDATE
+* DELETE
+* WHERE
+* LIKE
+* COUNT
+* GROUP BY
+
+### Engenharia de Software
+
+* Separação de responsabilidades
 * Persistência de dados
-* JSON
-* Tratamento de erros
-* Debugging
-* Arquitetura básica de software
-* UX em terminal
+* Organização de código
 * Versionamento com Git
 * GitHub
 
----
-
-# Como executar o projeto
+## Como Executar
 
 Clone o repositório:
 
@@ -74,63 +92,50 @@ Execute o sistema:
 python main.py
 ```
 
----
+## Roadmap
 
-# Roadmap do projeto
+### Versão Atual
 
-## V2.2 — Polimento do terminal
+* CRUD completo em SQLite
+* Estatísticas de entregas
+* Persistência em banco de dados
 
-* Melhorias de UX
-* Refatorações
-* Organização do código
-* Melhorias visuais
+### Próximas Etapas
 
-## V2.3 — Melhorias de dados
-
-* ID automático das entregas
-* Data e hora de cadastro
-* Múltiplos status
-* Pesquisa de entregas
-
-## V3 — Banco de dados
-
-* SQLite
-* CRUD completo
-* SQL
-
-## V4 — Aplicação web
+#### V4 — Aplicação Web
 
 * Flask
-* HTML
 * Rotas
 * Templates
-* Formulários web
+* Formulários Web
 
-## V5 — Dashboard
+#### V5 — Frontend
 
+* HTML
+* CSS
+* Interface Web Responsiva
+
+#### V6 — Dashboard
+
+* Indicadores
 * Métricas
-* Estatísticas
-* Gráficos
+* Estatísticas Visuais
 
-## V6 — Deploy
+#### V7 — Deploy
 
-* Publicação online
-* Hospedagem
-* Aplicação full stack
+* Render
+* Aplicação Online
+* Portfólio Profissional
 
----
-
-# Objetivo do projeto
+## Objetivo do Projeto
 
 * Desenvolver experiência prática em programação
-* Construir um portfólio real
-* Aprender desenvolvimento full stack
-* Evoluir conhecimentos em backend
+* Construir um portfólio técnico
+* Aprender desenvolvimento backend e full stack
+* Aplicar conceitos de banco de dados
 * Praticar Git e GitHub
-* Simular problemas reais de logística
+* Simular problemas reais da área logística
 
----
-
-# Status do projeto
+## Status
 
 Projeto em desenvolvimento contínuo.
