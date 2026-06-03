@@ -139,3 +139,13 @@ python main.py
 ## Status
 
 Projeto em desenvolvimento contínuo.
+
+## Autora
+
+**Rebecca Bomfim**
+
+Estudante de Engenharia de Software | Universidade Cruzeiro do Sul
+
+GitHub: https://github.com/rebeccabs
+
+LinkedIn: https://www.linkedin.com/in/rebecca-bomfim
