@@ -1,13 +1,31 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>Delivery Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
 <body>
 
-    <h1>Delivery Manager</h1>
+    <div class="page-container">
+        <div class="card">
+            <h1>Delivery Manager</h1>
+            <p class="subtitle">Sistema de gerenciamento de entregas</p>
 
-    <p>Meu primeiro site em Flask</p>
+            <div class="actions">
+                <a href="/entregas" class="btn-primary">Ver Entregas</a>
+                <a href="/cadastro" class="btn-secondary">Cadastrar Entrega</a>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>

@@ -1,0 +1,40 @@
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<body>
+    <body>
+
+    <div class="page-container">
+
+        <div class="card form-card">
+            <h1>Nova Entrega</h1>
+            <p class="subtitle">Cadastre uma nova entrega no sistema</p>
+
+            <form method="POST">
+                <label for="cliente">Cliente</label>
+                <input type="text" id="cliente" name="cliente" placeholder="Nome do cliente" required>
+
+                <label for="endereco">Endereço</label>
+                <input type="text" id="endereco" name="endereco" placeholder="Endereço de entrega" required>
+
+                <button type="submit" class="btn-primary">Cadastrar Entrega</button>
+            </form>
+
+            <a href="/" class="btn-secondary">Voltar</a>
+        </div>
+
+    </div>
+
+</body>
+
+<a href="/">
+    <button>Voltar</button>
+</a>
+</body>
+</html>
