@@ -127,3 +127,18 @@ def contar_entregas_por_status_db():
     conexao.close()
 
     return resultados
+
+def contar_total_entregas_db():
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        SELECT COUNT(*)
+        FROM entregas
+    """)
+
+    total = cursor.fetchone()[0]
+
+    conexao.close()
+
+    return total
