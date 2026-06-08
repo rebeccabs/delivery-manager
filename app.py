@@ -78,4 +78,5 @@ def excluir_entrega_web(id_entrega):
 
     return redirect("/entregas")
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
