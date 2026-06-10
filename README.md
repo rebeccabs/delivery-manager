@@ -1,55 +1,99 @@
 # Delivery Manager
 
-Sistema de gerenciamento de entregas desenvolvido em Python e SQLite com foco em aprendizado prático de desenvolvimento de software, banco de dados, versionamento com Git/GitHub e evolução para aplicações web.
+Sistema web de gerenciamento de entregas desenvolvido com Python, Flask e SQLite, criado para praticar desenvolvimento de software, banco de dados, versionamento com Git/GitHub e deploy em nuvem.
 
-O projeto simula uma operação logística de entregas, permitindo cadastrar, listar, pesquisar, atualizar e excluir entregas através de uma interface em terminal.
+O projeto simula uma operação logística real, permitindo cadastrar, visualizar, atualizar e excluir entregas através de uma interface web moderna e responsiva.
 
-A ideia surgiu a partir da minha experiência profissional com logística e operações de entrega, transformando situações reais do dia a dia em um software para estudo, prática e construção de portfólio.
+A ideia surgiu a partir da minha experiência profissional com logística e operações de entrega, transformando desafios do dia a dia em um projeto prático para estudo, evolução técnica e construção de portfólio.
+
+## Demonstração Online
+
+Aplicação disponível em:
+
+https://delivery-manager-syqz.onrender.com
 
 ## Tecnologias Utilizadas
 
+### Backend
+
 * Python
+* Flask
 * SQLite
+
+### Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+
+### Ferramentas
+
 * Git
 * GitHub
 * VS Code
+* Render
 
 ## Funcionalidades
 
+### Gestão de Entregas
+
 * Cadastro de entregas
 * Listagem de entregas
-* Pesquisa por cliente
 * Atualização de status
 * Exclusão de entregas
-* Estatísticas das entregas
-* Persistência de dados em banco SQLite
-* Tratamento de erros com try/except
-* Validação de entradas
-* Interface em terminal
+
+### Dashboard
+
+* Total de entregas
+* Entregas pendentes
+* Entregas em rota
+* Entregas concluídas
+
+### Persistência de Dados
+
+* Armazenamento em SQLite
+* Integração entre Flask e banco de dados
+* Operações CRUD completas
+
+### Interface
+
+* Tema dark personalizado
+* Design moderno com efeitos visuais
+* Layout responsivo
+* Navegação simples e intuitiva
 
 ## Estrutura do Projeto
 
 ```text
 delivery-manager/
 │
-├── main.py
+├── app.py
 ├── database.py
 ├── delivery_manager.db
+│
+├── templates/
+│   ├── index.html
+│   ├── entregas.html
+│   └── cadastro.html
+│
+├── static/
+│   ├── style.css
+│   └── script.js
+│
+├── requirements.txt
+├── Procfile
 └── README.md
 ```
 
 ## Conceitos Praticados
 
-### Python
+### Desenvolvimento Backend
 
-* Funções
-* Listas
-* Tuplas
-* Condicionais
-* Loops
-* Modularização
-* Tratamento de exceções
-* Refatoração de código
+* Flask
+* Rotas
+* Templates Jinja2
+* Formulários HTML
+* Integração com banco de dados
 
 ### Banco de Dados
 
@@ -60,19 +104,26 @@ delivery-manager/
 * UPDATE
 * DELETE
 * WHERE
-* LIKE
 * COUNT
 * GROUP BY
 
+### Frontend
+
+* HTML
+* CSS
+* JavaScript
+* Responsividade
+* Manipulação do DOM
+
 ### Engenharia de Software
 
-* Separação de responsabilidades
-* Persistência de dados
 * Organização de código
+* Separação de responsabilidades
 * Versionamento com Git
 * GitHub
+* Deploy em nuvem
 
-## Como Executar
+## Como Executar Localmente
 
 Clone o repositório:
 
@@ -86,46 +137,32 @@ Entre na pasta:
 cd delivery-manager
 ```
 
-Execute o sistema:
+Instale as dependências:
 
 ```bash
-python main.py
+pip install -r requirements.txt
 ```
 
-## Roadmap
+Execute a aplicação:
 
-### Versão Atual
+```bash
+python app.py
+```
 
-* CRUD completo em SQLite
-* Estatísticas de entregas
-* Persistência em banco de dados
+Acesse:
 
-### Próximas Etapas
+```text
+http://127.0.0.1:5000
+```
 
-#### V4 — Aplicação Web
+## Próximas Melhorias
 
-* Flask
-* Rotas
-* Templates
-* Formulários Web
-
-#### V5 — Frontend
-
-* HTML
-* CSS
-* Interface Web Responsiva
-
-#### V6 — Dashboard
-
-* Indicadores
-* Métricas
-* Estatísticas Visuais
-
-#### V7 — Deploy
-
-* Render
-* Aplicação Online
-* Portfólio Profissional
+* Pesquisa de entregas
+* Sistema de autenticação
+* Entregas vinculadas por usuário
+* Dashboard avançado
+* Controle de perfis e permissões
+* Migração para PostgreSQL
 
 ## Objetivo do Projeto
 
@@ -134,17 +171,20 @@ python main.py
 * Aprender desenvolvimento backend e full stack
 * Aplicar conceitos de banco de dados
 * Praticar Git e GitHub
+* Realizar deploy de aplicações web
 * Simular problemas reais da área logística
 
 ## Status
 
-Projeto em desenvolvimento contínuo.
+✅ Em desenvolvimento ativo
+
+Versão atual publicada e funcionando online.
 
 ## Autora
 
 **Rebecca Bomfim**
 
-Estudante de Engenharia de Software | Universidade Cruzeiro do Sul
+Estudante de Engenharia de Software – Universidade Cruzeiro do Sul
 
 GitHub: https://github.com/rebeccabs
 
