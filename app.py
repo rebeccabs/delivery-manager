@@ -1,4 +1,7 @@
 from flask import Flask, render_template, request, redirect
+import sqlite3
+
+app = Flask(__name__)
 
 from database import (
     listar_entregas_db,
@@ -8,8 +11,6 @@ from database import (
     contar_entregas_por_status_db,
     contar_total_entregas_db
 )
-
-app = Flask(__name__)
 
 @app.route("/")
 def home():
