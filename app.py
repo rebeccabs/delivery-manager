@@ -9,7 +9,8 @@ from database import (
     atualizar_status_db,
     excluir_entrega_db,
     contar_entregas_por_status_db,
-    contar_total_entregas_db
+    contar_total_entregas_db,
+    pesquisar_entregas_db
 )
 
 @app.route("/")
@@ -46,11 +47,17 @@ def home():
 
 @app.route("/entregas")
 def entregas():
-    entregas = listar_entregas_db()
+    termo = request.args.get("pesquisa")
+
+    if termo:
+        entregas = pesquisar_entregas_db(termo)
+    else:
+        entregas = listar_entregas_db()
 
     return render_template(
         "entregas.html",
-        entregas=entregas
+        entregas=entregas,
+        termo=termo
     )
 
 @app.route("/cadastro", methods=["GET", "POST"])

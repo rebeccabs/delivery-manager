@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -5,23 +6,49 @@
     <title>Entregas</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
 
     <div class="page-container top">
+
         <div class="card card-wide">
 
             <h1>Lista de Entregas</h1>
-
+        
             <p class="subtitle">
                 Acompanhe as entregas cadastradas no sistema
             </p>
+
+            <form method="GET" action="/entregas" class="form-pesquisa">
+
+                <input
+                    type="text"
+                    name="pesquisa"
+                    placeholder="Pesquisar por cliente, endereço ou status"
+                    value="{{ termo or '' }}"
+                >
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+                    Pesquisar
+                </button>
+
+                <a
+                    href="/entregas"
+                    class="btn-secondary"
+                >
+                    Limpar
+                </a>
+
+            </form>
 
             <div class="entregas-grid">
 
@@ -29,59 +56,114 @@
 
                     <div class="card-entrega">
 
-                        <span class="id-badge">#{{ entrega[0] }}</span>
+                        <span class="id-badge">
+                            #{{ entrega[0] }}
+                        </span>
 
-                        <p><strong>🚚 Cliente:</strong> {{ entrega[1] }}</p>
+                        <p>
+                            <strong>🚚 Cliente:</strong>
+                            {{ entrega[1] }}
+                        </p>
 
-                        <p><strong>📍 Endereço:</strong> {{ entrega[2] }}</p>
+                        <p>
+                            <strong>📍 Endereço:</strong>
+                            {{ entrega[2] }}
+                        </p>
 
                         {% if entrega[3] == "Entregue" %}
-                            <span class="status status-entregue">Entregue</span>
+
+                            <span class="status status-entregue">
+                                Entregue
+                            </span>
 
                         {% elif entrega[3] == "Em rota" %}
-                            <span class="status status-rota">Em rota</span>
+
+                            <span class="status status-rota">
+                                Em rota
+                            </span>
 
                         {% else %}
-                            <span class="status status-pendente">Pendente</span>
+
+                            <span class="status status-pendente">
+                                Pendente
+                            </span>
 
                         {% endif %}
 
-                        <form method="POST"
-                              action="/atualizar-status/{{ entrega[0] }}"
-                              class="status-form">
+                        <form
+                            method="POST"
+                            action="/atualizar-status/{{ entrega[0] }}"
+                            class="status-form"
+                        >
 
-                            <select name="status" class="select-status">
+                            <select
+                                name="status"
+                                class="select-status"
+                            >
                                 <option value="Pendente">Pendente</option>
                                 <option value="Em rota">Em rota</option>
                                 <option value="Entregue">Entregue</option>
                             </select>
 
-                            <button type="submit" class="btn-primary">
+                            <button
+                                type="submit"
+                                class="btn-primary"
+                            >
                                 Atualizar Status
                             </button>
 
                         </form>
 
-                    <form method="POST" action="/excluir/{{ entrega[0] }}">
-                        <button type="submit" class="btn-danger">Excluir</button>
-                    </form>
+                        <form
+                            method="POST"
+                            action="/excluir/{{ entrega[0] }}"
+                        >
+
+                            <button
+                                type="submit"
+                                class="btn-danger"
+                            >
+                                Excluir
+                            </button>
+
+                        </form>
 
                     </div>
+
+                {% else %}
+
+                    <p class="subtitle">
+                        Nenhuma entrega encontrada.
+                    </p>
 
                 {% endfor %}
 
             </div>
 
             <div class="actions">
-                <a href="/" class="btn-secondary">Voltar</a>
 
-                <a href="/cadastro" class="btn-primary">Nova Entrega</a>
+                <a
+                    href="/"
+                    class="btn-secondary"
+                >
+                    Voltar
+                </a>
+
+                <a
+                    href="/cadastro"
+                    class="btn-primary"
+                >
+                    Nova Entrega
+                </a>
+
             </div>
 
         </div>
+
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
+```

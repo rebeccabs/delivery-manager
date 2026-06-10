@@ -275,3 +275,19 @@ input:focus {
     font-size: 34px;
     color: #d8b4fe;
 }
+
+.form-pesquisa {
+    display: flex;
+    gap: 12px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+}
+
+.form-pesquisa input {
+    flex: 1;
+    min-width: 240px;
+}
+
+.form-pesquisa a {
+    text-decoration: none;
+}

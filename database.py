@@ -57,11 +57,15 @@ def pesquisar_entregas_db(termo):
     conexao = conectar()
     cursor = conexao.cursor()
 
+    termo = f"%{termo}%"
+
     cursor.execute("""
         SELECT id, cliente, endereco, status
         FROM entregas
         WHERE cliente LIKE ?
-    """, (f"%{termo}%",))
+        OR endereco LIKE ?
+        OR status LIKE ?
+    """, (termo, termo, termo))
 
     entregas = cursor.fetchall()
 
@@ -100,10 +104,11 @@ def atualizar_status_db(id_entrega, novo_status):
     conexao.commit()
     conexao.close()
 
+
 def excluir_entrega_db(id_entrega):
     conexao = conectar()
     cursor = conexao.cursor()
-    
+
     cursor.execute("""
         DELETE FROM entregas
         WHERE id = ?
@@ -111,6 +116,7 @@ def excluir_entrega_db(id_entrega):
 
     conexao.commit()
     conexao.close()
+
 
 def contar_entregas_por_status_db():
     conexao = conectar()
@@ -127,6 +133,7 @@ def contar_entregas_por_status_db():
     conexao.close()
 
     return resultados
+
 
 def contar_total_entregas_db():
     conexao = conectar()
