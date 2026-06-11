@@ -16,7 +16,8 @@ def criar_tabela():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             cliente TEXT NOT NULL,
             endereco TEXT NOT NULL,
-            status TEXT NOT NULL
+            status TEXT NOT NULL,
+            usuario_id INTEGER NOT NULL
         )
     """)
 
@@ -71,27 +72,28 @@ def buscar_usuario_por_email_db(email):
     return usuario
 
 
-def cadastrar_entregas_db(cliente, endereco, status):
+def cadastrar_entregas_db(cliente, endereco, status, usuario_id):
     conexao = conectar()
     cursor = conexao.cursor()
 
     cursor.execute("""
-        INSERT INTO entregas(cliente, endereco, status)
-        VALUES (?, ?, ?)
-    """, (cliente, endereco, status))
+        INSERT INTO entregas(cliente, endereco, status, usuario_id)
+        VALUES (?, ?, ?, ?)
+    """, (cliente, endereco, status, usuario_id))
 
     conexao.commit()
     conexao.close()
 
 
-def listar_entregas_db():
+def listar_entregas_db(usuario_id):
     conexao = conectar()
     cursor = conexao.cursor()
 
     cursor.execute("""
         SELECT id, cliente, endereco, status
         FROM entregas
-    """)
+        WHERE usuario_id = ?
+    """, (usuario_id,))
 
     entregas = cursor.fetchall()
 
@@ -100,7 +102,7 @@ def listar_entregas_db():
     return entregas
 
 
-def pesquisar_entregas_db(termo):
+def pesquisar_entregas_db(termo, usuario_id):
     conexao = conectar()
     cursor = conexao.cursor()
 
@@ -109,10 +111,13 @@ def pesquisar_entregas_db(termo):
     cursor.execute("""
         SELECT id, cliente, endereco, status
         FROM entregas
-        WHERE cliente LIKE ?
-        OR endereco LIKE ?
-        OR status LIKE ?
-    """, (termo, termo, termo))
+        WHERE usuario_id = ?
+        AND (
+            cliente LIKE ?
+            OR endereco LIKE ?
+            OR status LIKE ?
+        )
+    """, (usuario_id, termo, termo, termo))
 
     entregas = cursor.fetchall()
 
@@ -121,7 +126,7 @@ def pesquisar_entregas_db(termo):
     return entregas
 
 
-def atualizar_status_db(id_entrega, novo_status):
+def atualizar_status_db(id_entrega, novo_status, usuario_id):
     conexao = conectar()
     cursor = conexao.cursor()
 
@@ -129,34 +134,37 @@ def atualizar_status_db(id_entrega, novo_status):
         UPDATE entregas
         SET status = ?
         WHERE id = ?
-    """, (novo_status, id_entrega))
+        AND usuario_id = ?
+    """, (novo_status, id_entrega, usuario_id))
 
     conexao.commit()
     conexao.close()
 
 
-def excluir_entrega_db(id_entrega):
+def excluir_entrega_db(id_entrega, usuario_id):
     conexao = conectar()
     cursor = conexao.cursor()
 
     cursor.execute("""
         DELETE FROM entregas
         WHERE id = ?
-    """, (id_entrega,))
+        AND usuario_id = ?
+    """, (id_entrega, usuario_id))
 
     conexao.commit()
     conexao.close()
 
 
-def contar_entregas_por_status_db():
+def contar_entregas_por_status_db(usuario_id):
     conexao = conectar()
     cursor = conexao.cursor()
 
     cursor.execute("""
         SELECT status, COUNT(*)
         FROM entregas
+        WHERE usuario_id = ?
         GROUP BY status
-    """)
+    """, (usuario_id,))
 
     resultados = cursor.fetchall()
 
@@ -165,14 +173,15 @@ def contar_entregas_por_status_db():
     return resultados
 
 
-def contar_total_entregas_db():
+def contar_total_entregas_db(usuario_id):
     conexao = conectar()
     cursor = conexao.cursor()
 
     cursor.execute("""
         SELECT COUNT(*)
         FROM entregas
-    """)
+        WHERE usuario_id = ?
+    """, (usuario_id,))
 
     total = cursor.fetchone()[0]
 

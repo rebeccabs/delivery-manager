@@ -11,13 +11,15 @@ from database import (
     pesquisar_entregas_db,
     criar_tabela_usuarios,
     cadastrar_usuario_db,
-    buscar_usuario_por_email_db
+    buscar_usuario_por_email_db,
+    criar_tabela
 )
 
 app = Flask(__name__)
 app.secret_key = "delivery-manager-chave-secreta"
 
 criar_tabela_usuarios()
+criar_tabela()
 
 
 def usuario_logado():
@@ -81,13 +83,14 @@ def home():
         return redirect("/login")
     
 
-    total = contar_total_entregas_db()
+    usuario_id = session["usuario_id"]
 
+    total = contar_total_entregas_db(usuario_id)
     pendentes = 0
     em_rota = 0
     entregues = 0
 
-    resultados = contar_entregas_por_status_db()
+    resultados = contar_entregas_por_status_db(usuario_id)
 
     for resultado in resultados:
         status = resultado[0]
@@ -118,10 +121,12 @@ def entregas():
 
     termo = request.args.get("pesquisa")
 
+    usuario_id = session["usuario_id"]
+
     if termo:
-        entregas = pesquisar_entregas_db(termo)
+        entregas = pesquisar_entregas_db(termo, usuario_id)
     else:
-        entregas = listar_entregas_db()
+        entregas = listar_entregas_db(usuario_id)
 
     return render_template(
         "entregas.html",
@@ -139,7 +144,9 @@ def cadastro():
         cliente = request.form["cliente"]
         endereco = request.form["endereco"]
 
-        cadastrar_entregas_db(cliente, endereco, "Pendente")
+        usuario_id = session["usuario_id"]
+
+        cadastrar_entregas_db(cliente, endereco, "Pendente", usuario_id)
 
         return redirect("/entregas")
 
@@ -153,7 +160,9 @@ def atualizar_status_web(id_entrega):
 
     novo_status = request.form["status"]
 
-    atualizar_status_db(id_entrega, novo_status)
+    usuario_id = session["usuario_id"]
+
+    atualizar_status_db(id_entrega, novo_status, usuario_id)
 
     return redirect("/entregas")
 
@@ -163,7 +172,9 @@ def excluir_entrega_web(id_entrega):
     if not usuario_logado():
         return redirect("/login")
 
-    excluir_entrega_db(id_entrega)
+    usuario_id = session["usuario_id"]
+
+    excluir_entrega_db(id_entrega, usuario_id)
 
     return redirect("/entregas")
 
