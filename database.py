@@ -24,6 +24,53 @@ def criar_tabela():
     conexao.close()
 
 
+def criar_tabela_usuarios():
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS usuarios(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            senha TEXT NOT NULL
+        )
+    """)
+
+    conexao.commit()
+    conexao.close()
+
+
+def cadastrar_usuario_db(nome, email, senha):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        INSERT INTO usuarios(nome, email, senha)
+        VALUES (?, ?, ?)
+    """, (nome, email, senha))
+
+    conexao.commit()
+    conexao.close()
+
+
+def buscar_usuario_por_email_db(email):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        SELECT id, nome, email, senha
+        FROM usuarios
+        WHERE email = ?
+    """, (email,))
+
+    usuario = cursor.fetchone()
+
+    conexao.close()
+
+    return usuario
+
+
 def cadastrar_entregas_db(cliente, endereco, status):
     conexao = conectar()
     cursor = conexao.cursor()
@@ -72,23 +119,6 @@ def pesquisar_entregas_db(termo):
     conexao.close()
 
     return entregas
-
-
-def buscar_entrega_por_id_db(id_entrega):
-    conexao = conectar()
-    cursor = conexao.cursor()
-
-    cursor.execute("""
-        SELECT id, cliente, endereco, status
-        FROM entregas
-        WHERE id = ?
-    """, (id_entrega,))
-
-    entrega = cursor.fetchone()
-
-    conexao.close()
-
-    return entrega
 
 
 def atualizar_status_db(id_entrega, novo_status):
