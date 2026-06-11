@@ -21,9 +21,17 @@
                 Acesse sua conta para gerenciar suas entregas
             </p>
 
+            {% if erro %}
+                <div class="mensagem-erro">
+                    {{ erro }}
+                </div>
+            {% endif %}
+
             <form method="POST">
 
-                <label for="email">E-mail</label>
+                <label for="email">
+                    E-mail
+                </label>
 
                 <input
                     type="email"
@@ -33,7 +41,9 @@
                     required
                 >
 
-                <label for="senha">Senha</label>
+                <label for="senha">
+                    Senha
+                </label>
 
                 <input
                     type="password"
@@ -43,13 +53,19 @@
                     required
                 >
 
-                <button type="submit" class="btn-primary">
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
                     Entrar
                 </button>
 
             </form>
 
-            <a href="/registro" class="btn-secondary">
+            <a
+                href="/registro"
+                class="btn-secondary"
+            >
                 Criar conta
             </a>
 

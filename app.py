@@ -44,6 +44,9 @@ def registro():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+
+    erro = None
+
     if request.method == "POST":
         email = request.form["email"]
         senha = request.form["senha"]
@@ -51,14 +54,19 @@ def login():
         usuario = buscar_usuario_por_email_db(email)
 
         if usuario and check_password_hash(usuario[3], senha):
+
             session["usuario_id"] = usuario[0]
             session["usuario_nome"] = usuario[1]
 
             return redirect("/")
-        else:
-            return "E-mail ou senha inválidos."
 
-    return render_template("login.html")
+        else:
+            erro = "E-mail ou senha inválidos."
+
+    return render_template(
+        "login.html",
+        erro=erro
+    )
 
 
 @app.route("/logout")

@@ -398,3 +398,13 @@ input:focus {
         box-sizing: border-box;
     }
 }
+
+.mensagem-erro {
+    background: rgba(255, 0, 0, 0.15);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    color: #ff8080;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
